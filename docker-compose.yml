@@ -1,0 +1,28 @@
+version: "2"
+services:
+  reverseproxy:
+    build: ./reverseproxy
+    volumes:
+     - ./reverseproxy/logs:/var/log/nginx
+     - ./reverseproxy/conf.d:/etc/nginx/conf.d
+    ports:
+     - "80:80"
+     - "443:443"
+    expose:
+      - "80"
+      - "443"
+    links:
+      - matter-marketing
+  matter-marketing:
+    build:
+      context: ./matter-marketing
+      dockerfile: Dockerfile.development
+    command: npm run start-dev
+    volumes:
+      - ./matter-marketing:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+     - "80"
+    extra_hosts:
+      - "www.matterapp.local:127.0.0.1"
+    dns: 8.8.8.8
