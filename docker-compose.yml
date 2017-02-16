@@ -14,6 +14,7 @@ services:
     links:
       - matter-marketing
       - matter-client
+      - matter-api
   matter-marketing:
     build:
       context: ./matter-marketing
@@ -31,6 +32,16 @@ services:
     command: npm start
     volumes:
       - ./matter-client:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+     - "80"
+  matter-api:
+    build:
+      context: ./matter-api
+      dockerfile: Dockerfile.development
+    command: npm run dev
+    volumes:
+      - ./matter-api:/usr/src/app
       - /usr/src/app/node_modules
     expose:
      - "80"
