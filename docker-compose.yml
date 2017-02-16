@@ -44,4 +44,12 @@ services:
       - ./matter-api:/usr/src/app
       - /usr/src/app/node_modules
     expose:
-     - "80"
+      - "80"
+    links:
+      - matter-db-mongo
+  matter-db-mongo:
+    image: mongo:3.0
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
