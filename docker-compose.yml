@@ -13,6 +13,7 @@ services:
       - "443"
     links:
       - matter-marketing
+      - matter-client
   matter-marketing:
     build:
       context: ./matter-marketing
@@ -23,6 +24,13 @@ services:
       - /usr/src/app/node_modules
     expose:
      - "80"
-    extra_hosts:
-      - "www.matterapp.local:127.0.0.1"
-    dns: 8.8.8.8
+  matter-client:
+    build:
+      context: ./matter-client
+      dockerfile: Dockerfile.development
+    command: npm start
+    volumes:
+      - ./matter-client:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+     - "80"
