@@ -16,6 +16,8 @@ services:
       - matter-client
       - matter-api
   matter-marketing:
+    environment:
+     - BASE_DOMAIN=matterapp.dev
     build:
       context: ./matter-marketing
       dockerfile: Dockerfile.development
