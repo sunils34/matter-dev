@@ -1,9 +1,9 @@
 [submodule "matter-marketing"]
 	path = matter-marketing
 	url = git@github.com:sunils34/matter-marketing
-[submodule "matter-client"]
-	path = matter-client
-	url = git@github.com:sunils34/matter-client
 [submodule "matter-api"]
 	path = matter-api
 	url = git@github.com:sunils34/matter-api
+[submodule "matter-client"]
+	path = matter-client
+	url = git@github.com:sunils34/matter-client
