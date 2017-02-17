@@ -26,6 +26,8 @@ services:
     expose:
      - "80"
   matter-client:
+    environment:
+     - JWT_SECRET=localsecret
     build:
       context: ./matter-client
       dockerfile: Dockerfile.development
@@ -36,6 +38,10 @@ services:
     expose:
      - "80"
   matter-api:
+    environment:
+     - JWT_SECRET=localsecret
+     - MONGO_URI=mongodb://matter-db-mongo/matter
+     - COOKIE_SECRET=thisisabadsecret
     build:
       context: ./matter-api
       dockerfile: Dockerfile.development
