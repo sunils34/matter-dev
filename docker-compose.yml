@@ -1,47 +1,5 @@
 version: "2"
 services:
-  reverseproxy:
-    build: ./reverseproxy
-    volumes:
-     - ./reverseproxy/logs:/var/log/nginx
-     - ./reverseproxy/conf.d:/etc/nginx/conf.d
-    ports:
-     - "80:80"
-     - "443:443"
-    expose:
-      - "80"
-      - "443"
-    links:
-      - matter-marketing
-      - matter-app
-  matter-marketing:
-    environment:
-     - BASE_DOMAIN=matterapp.dev
-    build:
-      context: ./matter-marketing
-      dockerfile: Dockerfile.development
-    command: npm run start-dev
-    volumes:
-      - ./matter-marketing:/usr/src/app
-      - /usr/src/app/node_modules
-    expose:
-     - "80"
-  matter-app:
-    environment:
-     - JWT_SECRET=localsecret
-     - MONGO_URI=mongodb://matter-db-mongo/matter
-     - COOKIE_SECRET=thisisabadsecret
-     - JWT_SECRET=thisisabadsecret
-    build:
-      context: ./matter-app
-      dockerfile: Dockerfile.development
-    command: npm run dev
-    volumes:
-      - ./matter-app:/usr/src/app
-    expose:
-      - "80"
-    links:
-      - matter-db-mongo
   matter-db-mongo:
     image: mongo:3.0
     ports:
