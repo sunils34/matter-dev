@@ -13,8 +13,7 @@ services:
       - "443"
     links:
       - matter-marketing
-      - matter-client
-      - matter-api
+      - matter-app
   matter-marketing:
     environment:
      - BASE_DOMAIN=matterapp.dev
@@ -27,30 +26,18 @@ services:
       - /usr/src/app/node_modules
     expose:
      - "80"
-  matter-client:
-    environment:
-     - JWT_SECRET=localsecret
-    build:
-      context: ./matter-client
-      dockerfile: Dockerfile.development
-    command: npm start
-    volumes:
-      - ./matter-client:/usr/src/app
-      - /usr/src/app/node_modules
-    expose:
-     - "80"
-  matter-api:
+  matter-app:
     environment:
      - JWT_SECRET=localsecret
      - MONGO_URI=mongodb://matter-db-mongo/matter
      - COOKIE_SECRET=thisisabadsecret
+     - JWT_SECRET=thisisabadsecret
     build:
-      context: ./matter-api
+      context: ./matter-app
       dockerfile: Dockerfile.development
     command: npm run dev
     volumes:
-      - ./matter-api:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./matter-app:/usr/src/app
     expose:
       - "80"
     links:
@@ -61,3 +48,5 @@ services:
       - "27017:27017"
     expose:
       - "27017"
+    volumes:
+      - ./mongo:/data/db
