@@ -14,6 +14,26 @@ services:
     links:
     - matter-auth
     - matter-marketing
+    - matter-app
+
+  matter-app:
+    build:
+      context: ./matter-app
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./matter-app:/usr/src/app/
+    links:
+      - matter-db-sql
+      - matter-auth
+    expose:
+      - "80"
+      - "443"
+    environment:
+     - NODE_ENV=development
+     - PORT=80
+     - BASE_DOMAIN=app.matterapp.dev
+     - MYSQL_DEVELOPMENT_URI=mysql://root:test_pass@matter-db-sql/matter_dev
+    command: npm run dev
 
   matter-auth:
     build:
