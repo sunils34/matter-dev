@@ -1,10 +1,65 @@
 version: "2"
 services:
-  matter-db-mongo:
-    image: mongo:3.0
-    ports:
-      - "27017:27017"
-    expose:
-      - "27017"
+  reverseproxy:
+    build: ./reverseproxy
     volumes:
-      - ./mongo:/data/db
+     - ./reverseproxy/logs:/var/log/nginx
+     - ./reverseproxy/conf.d:/etc/nginx/conf.d
+    ports:
+     - "80:80"
+     - "443:443"
+    expose:
+      - "80"
+      - "443"
+    links:
+    - matter-auth
+    - matter-marketing
+
+  matter-auth:
+    build:
+      context: ./matter-auth
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./matter-auth:/usr/src/app/
+    links:
+      - matter-db-sql
+    expose:
+      - "80"
+      - "443"
+    environment:
+     - NODE_ENV=development
+     - PORT=80
+     - GOOGLE_CALLBACK_URL=https://login.matterapp.dev/oauth/google/callback
+     - BASE_DOMAIN=login.matterapp.dev
+    command: npm run start-dev
+
+  matter-marketing:
+    build:
+      context: ./matter-marketing
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./matter-marketing:/usr/src/app/
+    links:
+      - matter-db-sql
+    environment:
+     - NODE_ENV=development
+     - PORT=80
+    expose:
+      - "80"
+      - "443"
+    command: npm run start-dev
+
+  matter-db-sql:
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass'
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+      MYSQL_DATABASE: 'matter'
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql-files:/var/lib/mysql-files
