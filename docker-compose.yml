@@ -12,7 +12,7 @@ services:
       - "80"
       - "443"
     links:
-    - matter-auth
+#    - matter-auth
     - matter-marketing
     - matter-app
 
@@ -24,34 +24,44 @@ services:
       - ./matter-app:/usr/src/app/
     links:
       - matter-db-sql
-      - matter-auth
+#      - matter-auth
     expose:
       - "80"
       - "443"
+#      - "35729"
+#    ports:
+#     - "35729:35729"
     environment:
-     - NODE_ENV=development
-     - PORT=80
+     - ADMIN_EMAILS=leo@matterapp.io,sunil@matterapp.io,laura@matterapp.io
      - BASE_DOMAIN=app.matterapp.dev
+     - COOKIE_SECRET=thisisabadsecret
+     - GOOGLE_CALLBACK_URL=http://app.matterapp.dev/auth/google/callback
+     - GOOGLE_CLIENT_ID=698843661558-rrsbe9ge69a0mjong19irekepopmlk0e.apps.googleusercontent.com
+     - GOOGLE_CLIENT_SECRET=OmiA8mnJy1s98bKvsD9Gwd_7
+     - JWT_SECRET=localsecret
      - MYSQL_DEVELOPMENT_URI=mysql://root:test_pass@matter-db-sql/matter_dev
-    command: npm run dev
-
-  matter-auth:
-    build:
-      context: ./matter-auth
-      dockerfile: Dockerfile.development
-    volumes:
-      - ./matter-auth:/usr/src/app/
-    links:
-      - matter-db-sql
-    expose:
-      - "80"
-      - "443"
-    environment:
-     - NODE_ENV=development
+     - MYSQL_PRODUCTION_URI=mysql://root:test_pass@matter-db-sql/matter_dev
+     - NODE_ENV=production
      - PORT=80
-     - GOOGLE_CALLBACK_URL=https://login.matterapp.dev/oauth/google/callback
-     - BASE_DOMAIN=login.matterapp.dev
-    command: npm run start-dev
+    command: npm run build-start-prod
+
+#  matter-auth:
+#    build:
+#      context: ./matter-auth
+#      dockerfile: Dockerfile.development
+#    volumes:
+#      - ./matter-auth:/usr/src/app/
+#    links:
+#      - matter-db-sql
+#    expose:
+#      - "80"
+#      - "443"
+#    environment:
+#     - NODE_ENV=development
+#     - PORT=80
+#     - GOOGLE_CALLBACK_URL=https://login.matterapp.dev/oauth/google/callback
+#     - BASE_DOMAIN=login.matterapp.dev
+#    command: npm run start-dev
 
   matter-marketing:
     build:
