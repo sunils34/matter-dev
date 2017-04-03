@@ -32,7 +32,7 @@ services:
 #    ports:
 #     - "35729:35729"
     environment:
-     - ADMIN_EMAILS=leo@matterapp.io,sunil@matterapp.io,laura@matterapp.io
+     - ADMIN_EMAILS=leo@matterapp.io,sunil@matterapp.io,laura@matterapp.io,,
      - BASE_DOMAIN=app.matterapp.dev
      - COOKIE_SECRET=thisisabadsecret
      - GOOGLE_CALLBACK_URL=http://app.matterapp.dev/auth/google/callback
@@ -41,9 +41,9 @@ services:
      - JWT_SECRET=localsecret
      - MYSQL_DEVELOPMENT_URI=mysql://root:test_pass@matter-db-sql/matter_dev
      - MYSQL_PRODUCTION_URI=mysql://root:test_pass@matter-db-sql/matter_dev
-     - NODE_ENV=production
+     - NODE_ENV=development
      - PORT=80
-    command: npm run build-start-prod
+    command: npm run dev
 
 #  matter-auth:
 #    build:
