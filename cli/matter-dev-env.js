@@ -1,12 +1,15 @@
 /* eslint-env node */
 const {execSync} = require('child_process');
 const logger = require('winston');
+const path = require('path');
+const dir = path.resolve(__dirname + '/..');
 logger.level = 'debug';
+
 
 function execute(command){
   logger.debug(`exec ${command}`);
   // Redirect child stdio to parent's stdio
-  execSync(command, {'stdio': [0,1,2]});
+  execSync(`cd ${dir} && ${command}`, {'stdio': [0,1,2]});
 }
 
 function addservice(command, service) {
@@ -32,8 +35,8 @@ var MatterCli = {
     const execCommand = 'docker-compose up -d';
     execute(addservice(execCommand, service));
     execute('docker-compose ps');
-    logger.info('Waiting 10 seconds before starting app');
-    execute('sleep 1');
+    logger.info('Waiting 10 seconds for the database to start');
+    execute('sleep 10');
     execute('cd ./matter-app && npm run dev');
   },
   'stop'(service) {
