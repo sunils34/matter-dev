@@ -1,0 +1,26 @@
+{
+  "name": "matter-dev",
+  "version": "1.0.0",
+  "description": "Matter local development environment and cli",
+  "main": "cli.js",
+  "bin": {
+    "matter-dev": "./cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunils34/matter-dev.git"
+  },
+  "author": "Sunil Sadasivan",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/sunils34/matter-dev/issues"
+  },
+  "homepage": "https://github.com/sunils34/matter-dev#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "sync-exec": "^0.6.2"
+  }
+}
