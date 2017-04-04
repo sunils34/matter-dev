@@ -5,8 +5,9 @@ const path = require('path');
 const dir = path.resolve(__dirname + '/..');
 logger.level = 'debug';
 
+logger.info('working dir', dir);
 
-function execute(command){
+function execute(command) {
   logger.debug(`exec ${command}`);
   // Redirect child stdio to parent's stdio
   execSync(`cd ${dir} && ${command}`, {'stdio': [0,1,2]});
