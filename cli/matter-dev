@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+/* eslint-env node */
+var program = require('commander');
+
+program
+  .version('0.0.1')
+  .command('env', 'Run commands for the local environment')
+  .command('code',  'Run commands for the local codebase (unimplemented)')
+;
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}

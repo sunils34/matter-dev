@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+/* eslint-env node */
+var program = require('commander');
+var logger = require('winston');
+var MatterCli = require('./matter-dev-env.js');
+
+program
+  .command('build [service]')
+  .description('Build service (Default is matter-app-local)')
+  .action(MatterCli.build);
+
+program
+  .command('start [service]')
+  .description('Start service (Default is matter-app-local)')
+  .action(MatterCli.start);
+
+program
+  .command('stop [service]')
+  .description('Stop a service (Default is matter-app-local)')
+  .action(MatterCli.stop);
+
+program
+  .command('ps')
+  .description('View running services')
+  .action(MatterCli.ps);
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}

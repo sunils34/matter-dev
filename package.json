@@ -2,9 +2,9 @@
   "name": "matter-dev",
   "version": "1.0.0",
   "description": "Matter local development environment and cli",
-  "main": "cli.js",
+  "main": "./cli/matter-dev",
   "bin": {
-    "matter-dev": "./cli.js"
+    "matter-dev": "./cli/matter-dev"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/sunils34/matter-dev#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "sync-exec": "^0.6.2"
-  }
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {}
 }
