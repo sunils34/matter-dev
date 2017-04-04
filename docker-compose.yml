@@ -80,12 +80,13 @@ services:
     command: npm run start-dev
 
   matter-db-sql:
+    build:
+      context: ./matter-db-sql
     environment:
       MYSQL_ROOT_PASSWORD: 'test_pass'
       MYSQL_USER: 'test'
       MYSQL_PASS: 'pass'
-      MYSQL_DATABASE: 'matter'
-    image: mysql:5.7
+      MYSQL_DATABASE: 'matter_dev'
     ports:
       - "3306:3306"
     expose:
