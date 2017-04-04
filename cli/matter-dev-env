@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* eslint-env node */
 var program = require('commander');
-var logger = require('winston');
 var MatterCli = require('./matter-dev-env.js');
 
 program
@@ -18,6 +17,11 @@ program
   .command('stop [service]')
   .description('Stop a service (Default is matter-app-local)')
   .action(MatterCli.stop);
+
+program
+  .command('clean [service]')
+  .description('Wipe and clean local environment')
+  .action(MatterCli.clean);
 
 program
   .command('ps')
