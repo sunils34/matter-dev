@@ -5,17 +5,17 @@ var MatterCli = require('./matter-dev-env.js');
 
 program
   .command('build [service]')
-  .description('Build service (Default is matter-app-local)')
+  .description('Build service (Default is app-local)')
   .action(MatterCli.build);
 
 program
   .command('start [service]')
-  .description('Start service (Default is matter-app-local)')
+  .description('Start service (Default is app-local)')
   .action(MatterCli.start);
 
 program
   .command('stop [service]')
-  .description('Stop a service (Default is matter-app-local)')
+  .description('Stop a service (Default is app-local)')
   .action(MatterCli.stop);
 
 program
