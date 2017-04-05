@@ -80,8 +80,7 @@ services:
     command: npm run start-dev
 
   matter-db-sql:
-    build:
-      context: ./matter-db-sql
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 'test_pass'
       MYSQL_USER: 'test'
@@ -92,5 +91,6 @@ services:
     expose:
       - "3306"
     volumes:
+      - ./matter-db-sql:/docker-entrypoint-initdb.d
       - ./data/mysql:/var/lib/mysql
       - ./data/mysql-files:/var/lib/mysql-files
