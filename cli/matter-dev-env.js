@@ -1,17 +1,7 @@
 /* eslint-env node */
-const {execSync} = require('child_process');
 const logger = require('winston');
-const path = require('path');
-const dir = path.resolve(__dirname + '/..');
+const {execute} = require('./utils');
 logger.level = 'debug';
-
-logger.info('working dir', dir);
-
-function execute(command) {
-  logger.debug(`exec ${command}`);
-  // Redirect child stdio to parent's stdio
-  execSync(`cd ${dir} && ${command}`, {'stdio': [0,1,2]});
-}
 
 function addservice(command, service) {
   command += ' ' + (service || 'matter-db-sql');
