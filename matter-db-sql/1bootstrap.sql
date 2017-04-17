@@ -341,6 +341,7 @@ CREATE TABLE `users` (
   `profileType` varchar(100) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
   `passwordHash` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT 'user',
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

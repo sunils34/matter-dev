@@ -32,7 +32,8 @@ services:
 #    ports:
 #     - "35729:35729"
     environment:
-     - ADMIN_EMAILS=leo@matterapp.io,sunil@matterapp.io,laura@matterapp.io,,
+     - MATTER_ADMINS=leo@matterapp.io,sunil@matterapp.io,laura@matterapp.io,,
+     - ORG_ADMINS=sunils34@gmail.com,,
      - BASE_DOMAIN=app.matterapp.dev
      - COOKIE_SECRET=thisisabadsecret
      - GOOGLE_CALLBACK_URL=http://app.matterapp.dev/auth/google/callback
